@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bilibili.datasource.mapper.DsAdminMapper">
+    <select id="getDsAdminByLogin" parameterType="com.bilibili.datasource.entites.DsAdmin" resultType="com.bilibili.datasource.entites.DsAdmin">
+    select * from ds_admin where admin_account = #{admin_account}
+</select>
+</mapper>
