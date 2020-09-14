@@ -16,8 +16,12 @@ public class DsAdminServiceTest {
     @Test
     public void method1() {
         DsAdmin dsAdmin = new DsAdmin();
-        dsAdmin.setAdmin_accout("admin");
+        dsAdmin.setAdmin_account("admin");
         dsAdmin = dsAdminService.getDsAdminByLogin(dsAdmin);
         System.out.println(dsAdmin);
+    }
+    @Test
+    public void getEmployeeAllTest(){
+        System.out.println(dsAdminService.getDsAdminAll(1-1,10));
     }
 }

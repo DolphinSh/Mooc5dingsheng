@@ -23,15 +23,15 @@
           "child": [
             {
               "title": "部门管理",
-              "href": "section/index",
+              "href": "page/personmanage/part-manage.html",
               "target": "_self"
             },{
               "title": "人员管理",
-              "href": "staff/index",
+              "href": "page/personmanage/person-manage.html",
               "target": "_self"
             },{
               "title": "常用报表",
-              "href": "#",
+              "href": "page/personmanage/common-report.html",
               "target": "_self"
             }
           ]

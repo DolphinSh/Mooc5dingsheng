@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>部门管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+</head>
+<body>
+
+<table id="demo" lay-filter="demo"></table>
+    <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script th:inline="javascript">
+        layui.use(['table', 'form'], function () {
+            var table = layui.table;
+            var form = layui.form;
+            var $ = layui.$;
+
+        form.render('select');
+        //执行渲染
+        table.render({
+            elem: '#demo' //指定原始表格元素选择器（推荐id选择器）
+            ,url:'getEmployeeAll'//数据请求路径
+            ,cellMinWidth: 80
+            ,height: 500 //容器高度
+            ,cols: [
+                [
+                    {field: 'admin_id', title: 'ID'}
+                    , {field: 'admin_account', title: '用户名'}
+                    , {field: 'admin_gender', title: '性别',
+                    templet: function(data){
+                        if(data.admin_gender==1){
+                            return 	"<span>男</span>";
+                        }else if(data.admin_gender==2){
+                            return "<span>女</span>";
+                        }else {
+                            return "<span>保密</span>";
+                        }
+                        }
+                    },{field: 'admin_age', title: '年龄' }
+                    , {field: 'admin_firstDept', title: '一级部门'}
+                    , {field: 'admin_secondDept', title: '二级部门'}
+                    , {field: 'admin_job', title: '职位'}
+                    , {field: 'updateTime', title: '最后更新时间'}
+                    , {fixed: 'right',title:'操作',width:150,
+                        templet: function(data){
+                            return "<a href='#' title='编辑' class='layui-btn layui-btn-xs layui-btn-normal' lay-event='edit'><icon class='layui-icon'>&#xe642;</icon></a>"+
+                                "<a href=#' title='删除' class='layui-btn layui-bg-red layui-btn-xs layui-btn-normal' lay-event='del'><icon class='layui-icon'>&#xe640;</icon></a>";
+                        }
+                    }
+                ]
+            ]
+            ,id : 'Reload'
+            ,page : true //开启分页
+            ,limit : 10 //默认十条数据一页
+            ,limits : [10, 20, 30, 50]  //数据分页条
+        });
+
+
+            table.on('tool(test)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+                var data = obj.data; //获得当前行数据
+                var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+                var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+
+                if (layEvent === 'del') { //删除·
+                    layer.confirm('真的删除行么', function (index) {
+                        data.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        //向服务端发送删除指令
+                        $.ajax({
+                            url:'deleteOneUser',
+                            type:'post',
+                            data:{'id':data.admin_account},//向服务端发送删除的id
+                            success:function(suc){
+                                if(suc==200){
+                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                    layer.close(index);
+                                    console.log(index);
+                                    layer.msg("删除成功",{icon:1});
+                                }
+                                else{
+                                    layer.msg("删除失败",{icon:5});
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    });
+                } else if (layEvent === 'edit') { //编辑
+                    //do something
+                    layer.open({
+                        type: 1,
+                        area: ['500px', '700px'],
+                        title: "更改信息",
+                        fixed: false, //不固定
+                        maxmin: true,
+                        maxmin: false,
+                        shadeClose:false,
+                        content: $('#usersedit')
+                    });
+                    //表单值
+                    form.val("demo",{
+                        "admin_account":data.admin_account,
+                        "admin_gender":data.admin_gender,
+                        "admin_age":data.admin_age,
+                        "admin_firstDept":data.admin_firstDept,
+                        "admin_secondDept":data.admin_secondDept,
+                        "admin_job":data.admin_job
+                    });
+                }
+            });
+        });
+    </script>
+<!--日期格式化js-->
+
+</body>
+
+</html>

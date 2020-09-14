@@ -4,5 +4,8 @@
 <mapper namespace="com.bilibili.datasource.mapper.DsAdminMapper">
     <select id="getDsAdminByLogin" parameterType="com.bilibili.datasource.entites.DsAdmin" resultType="com.bilibili.datasource.entites.DsAdmin">
     select * from ds_admin where admin_account = #{admin_account}
-</select>
+    </select>
+    <select id="getDsAdminAll" parameterType="Integer" resultType="com.bilibili.datasource.entites.DsAdmin">
+    SELECT admin_id,admin_account,admin_gender,admin_age,admin_firstDept,admin_secondDept,admin_job,updateTime FROM ds_admin ORDER BY admin_id LIMIT #{pageNumber},#{limit};
+    </select>
 </mapper>

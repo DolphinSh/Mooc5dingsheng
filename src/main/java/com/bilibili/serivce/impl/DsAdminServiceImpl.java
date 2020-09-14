@@ -7,6 +7,8 @@ import com.bilibili.serivce.DsAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class DsAdminServiceImpl implements DsAdminService {
     @Autowired
@@ -14,5 +16,10 @@ public class DsAdminServiceImpl implements DsAdminService {
     @Override
     public DsAdmin getDsAdminByLogin(DsAdmin dsAdmin) {
         return dsAdminMapper.getDsAdminByLogin(dsAdmin);
+    }
+
+    @Override
+    public ArrayList<DsAdmin> getDsAdminAll(Integer pageNumber,Integer limit) {
+        return dsAdminMapper.getDsAdminAll(pageNumber,limit);
     }
 }

@@ -22,7 +22,7 @@ import java.util.UUID;
 
 @Slf4j
 @Controller
-public class IndexController {
+public class LoginController {
     @Autowired
     private DsAdminService dsAdminService;
     /*做日志类*/
@@ -86,7 +86,7 @@ public class IndexController {
         // 数据库里面密码是MD5+盐
         // 前端密码 + 盐 = 数据库密码
         DsAdmin dsAdmin = new DsAdmin();
-        dsAdmin.setAdmin_accout(username); // 前端返回的数据
+        dsAdmin.setAdmin_account(username); // 前端返回的数据
         dsAdmin = dsAdminService.getDsAdminByLogin(dsAdmin);
 
         String salt = dsAdmin.getAdmin_salt(); // 数据库里面的内容
@@ -103,8 +103,8 @@ public class IndexController {
             return msgData;
         }
     }
-    @GetMapping("/home")
-    public String home() {
-        return "home";
+    @GetMapping("/index")
+    public String index() {
+        return "index";
     }
 }
