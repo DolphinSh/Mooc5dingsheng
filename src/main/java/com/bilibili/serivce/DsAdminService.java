@@ -7,4 +7,6 @@ import java.util.ArrayList;
 public interface DsAdminService {
     DsAdmin getDsAdminByLogin(DsAdmin dsAdmin);
     ArrayList<DsAdmin> getDsAdminAll(Integer pageNumber,Integer limit);
+    Integer getPageSize();
+    boolean deleteOneByAccount(String admin_account);
 }

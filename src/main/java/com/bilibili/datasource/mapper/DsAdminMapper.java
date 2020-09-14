@@ -12,4 +12,6 @@ import java.util.ArrayList;
 public interface DsAdminMapper {
     DsAdmin getDsAdminByLogin(DsAdmin dsAdmin);
     ArrayList<DsAdmin> getDsAdminAll(@Param("pageNumber")Integer pageNumber, @Param("limit")Integer limit);
+    Integer getPageSize();
+    boolean deleteOneByAccount(String admin_account);
 }

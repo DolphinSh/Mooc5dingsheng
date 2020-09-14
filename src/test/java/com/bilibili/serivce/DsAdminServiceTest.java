@@ -24,4 +24,13 @@ public class DsAdminServiceTest {
     public void getEmployeeAllTest(){
         System.out.println(dsAdminService.getDsAdminAll(1-1,10));
     }
+    @Test
+    public void getPageSizeTest(){
+        System.out.println(dsAdminService.getPageSize());
+    }
+    @Test
+    public void deleteOneByAccount(){
+        System.out.println(dsAdminService.deleteOneByAccount("develop3"));
+    }
+
 }

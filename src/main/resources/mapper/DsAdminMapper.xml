@@ -8,4 +8,10 @@
     <select id="getDsAdminAll" parameterType="Integer" resultType="com.bilibili.datasource.entites.DsAdmin">
     SELECT admin_id,admin_account,admin_gender,admin_age,admin_firstDept,admin_secondDept,admin_job,updateTime FROM ds_admin ORDER BY admin_id LIMIT #{pageNumber},#{limit};
     </select>
+    <select id="getPageSize" resultType="Integer">
+        SELECT count(*) FROM ds_admin
+    </select>
+    <delete id="deleteOneByAccount">
+        DELETE FROM ds_admin WHERE admin_account = #{admin_account}
+    </delete>
 </mapper>

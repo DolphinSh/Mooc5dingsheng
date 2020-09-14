@@ -2,20 +2,18 @@ package com.bilibili.controller;
 
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.bilibili.datasource.entites.DsAdmin;
+import com.bilibili.datasource.entites.DsSection;
+import com.bilibili.datasource.vo.MsgData;
 import com.bilibili.datasource.vo.TableData;
 import com.bilibili.serivce.DsAdminService;
 
+import com.bilibili.serivce.DsSectionService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.mapping.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,17 +23,40 @@ import java.util.Map;
 public class HRMController {
     @Autowired
     private DsAdminService dsAdminService;
+    @Autowired
+    private DsSectionService dsSectionService;
     @ResponseBody
     @RequestMapping(value = "page/personmanage/getEmployeeAll",produces = {"application/text;charset=UTF-8"})
     public String employeeAll(@RequestParam("page") int page, @RequestParam("limit") int limit, String deptType){
         TableData tableData = new TableData();
-        List<DsAdmin> all =  dsAdminService.getDsAdminAll(0,11);
+        List<DsAdmin> all =  dsAdminService.getDsAdminAll((page-1)*limit,limit);
         Map<String,Object> model = new HashMap<String, Object>();
         model.put("code",0);
-        model.put("msg","");
-        model.put("count",all.size()+1);
+        model.put("msg","msg ok");
+        model.put("count",dsAdminService.getPageSize());
         model.put("data",all);
         log.info(JSON.toJSONString(model));
         return JSON.toJSONString(model);
     }
+    @PostMapping("/page/personmanage/deleteOneUser")
+    @ResponseBody
+    public MsgData deleteOneUser(String admin_account){
+        MsgData msgData = new MsgData();
+        boolean isDel =  dsAdminService.deleteOneByAccount(admin_account);
+        if (isDel){
+            msgData.setCode(200);
+            msgData.setMsg("success");
+            return msgData;
+        }else {
+            msgData.setCode(-1);
+            msgData.setMsg("Faile");
+        }
+        return msgData;
+    }
+    @GetMapping("/page/personmanage/getDsSection")
+    @ResponseBody
+    public List<DsSection> getDsSection() {
+        return dsSectionService.getDsSection();
+    }
+
 }

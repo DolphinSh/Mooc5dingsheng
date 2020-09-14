@@ -22,4 +22,19 @@ public class DsAdminServiceImpl implements DsAdminService {
     public ArrayList<DsAdmin> getDsAdminAll(Integer pageNumber,Integer limit) {
         return dsAdminMapper.getDsAdminAll(pageNumber,limit);
     }
+
+    @Override
+    public Integer getPageSize() {
+        return dsAdminMapper.getPageSize();
+    }
+
+    @Override
+    public boolean deleteOneByAccount(String admin_account) {
+       boolean isDel =  dsAdminMapper.deleteOneByAccount(admin_account);
+       if (isDel == true){
+           return true;
+       }else {
+           return false;
+       }
+    }
 }
