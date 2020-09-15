@@ -4,4 +4,7 @@
     <select id="getDsSection" resultType="com.bilibili.datasource.entites.DsSection">
         select * from ds_section
     </select>
+    <select id="getParentDsSection" resultType="com.bilibili.datasource.entites.DsSection">
+        SELECT section_name FROM `ds_section` WHERE section_pid = 1;
+    </select>
 </mapper>

@@ -59,4 +59,9 @@ public class HRMController {
         return dsSectionService.getDsSection();
     }
 
+    @GetMapping("/page/personmanage/getParentSection")
+    @ResponseBody
+    public String getParentSection(){
+        return JSON.toJSONString(dsSectionService.getParentDsSection());
+    }
 }

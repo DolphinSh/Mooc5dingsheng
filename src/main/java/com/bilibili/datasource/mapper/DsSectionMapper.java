@@ -10,4 +10,5 @@ import java.util.List;
 @Component
 public interface DsSectionMapper {
     List<DsSection> getDsSection();
+    List<DsSection> getParentDsSection();
 }

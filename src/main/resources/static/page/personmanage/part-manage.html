@@ -107,7 +107,6 @@
                         layer.close(index);
                     });
                 } else if (layEvent === 'edit') { //编辑
-
                     //do something
                     layer.open({
                         type: 2,
@@ -118,12 +117,26 @@
                         shadeClose: false,
                         anim: 0, //打开动画
                         content: 'mod-userinfo.html?' +
-                            'admin_account=' +data.admin_account
-                            +"&admin_gender="+data.admin_gender
-                            +"&admin_age="+data.admin_age
+                            "&admin_gender="+data.admin_gender
                             +"&admin_firstDept="+data.admin_firstDept
                             +"&admin_secondDept="+data.admin_secondDept
                             +"&admin_job="+data.admin_job
+                        ,success:function (layer,index) {
+                            var chidFrom = layer.find("iframe").contents().find("#dept-userModFrom");
+                            /*console.log(chidFrom);*/
+                            chidFrom.find("#admin_account").val(data.admin_account);
+                            chidFrom.find("#admin_age").val(data.admin_age);
+                            if (data.admin_gender == 1){
+                                console.log("ok")
+                                chidFrom.find("#admin_gender_man").prop("checked",false);
+                                chidFrom.find("#admin_gender_woman").prop("checked",true);
+                            }else {
+                                chidFrom.find("#admin_gender_man").prop("checked",true);
+                                chidFrom.find("#admin_gender_woman").prop("checked",false);
+                            }
+
+
+                        }
                     });
                     /* //同步更新缓存对应的值
                      obj.update({

@@ -10,12 +10,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class DsAdminServiceTest {
+public class DsSectionServiceTest {
     @Autowired
     private DsSectionService dsSectionService;
 
     @Test
     public void getSectionTest(){
         dsSectionService.getDsSection();
+    }
+
+    @Test
+    public void getParentSectionTest(){
+        System.out.println(dsSectionService.getParentDsSection());
     }
 }

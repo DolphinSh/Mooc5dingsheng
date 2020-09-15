@@ -17,4 +17,9 @@ public class DsSectionServiceImpl implements DsSectionService {
     public List<DsSection> getDsSection() {
         return dsSectionMapper.getDsSection();
     }
+
+    @Override
+    public List<DsSection> getParentDsSection() {
+        return dsSectionMapper.getParentDsSection();
+    }
 }

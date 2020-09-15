@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface DsSectionService {
     List<DsSection> getDsSection();
+    List<DsSection> getParentDsSection();
 }
