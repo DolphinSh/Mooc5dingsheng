@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>部门管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+    <link rel="stylesheet" href="../ztree/css/demo.css" type="text/css">
+    <link rel="stylesheet" href="../ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layui-row">
+        <div class="layui-col-md3">
+            <div class="layuimini-main">
+                <ul id="ztreedemo" class="ztree"></ul>
+            </div>
+        </div>
+        <div class="layui-col-md9">
+            <div class="layuimini-main">
+                <script type="text/html" id="toolbarDemo">
+                    <div class="layui-btn-container">
+                        <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add"> 添加部门</button>
+                        <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete">
+                            删除部门
+                        </button>
+                    </div>
+                </script>
+
+                <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+                <script type="text/html" id="currentTableBar">
+                    <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="../ztree/js/jquery-1.4.4.min.js"></script>
+<script src="../ztree/js/jquery.ztree.core.js"></script>
+<script src="../ztree/js/jquery.ztree.excheck.js"></script>
+<script>
+    // ztree 全局配置
+    var setting = {
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: 'id',
+                pIdKey: 'pId',
+                rootId: 0
+            }
+        }
+    };
+
+    // 静态数据
+    var nodes = [
+        {id: 1, pId: 0, name: "父节点1 - 展开", open: true},
+        {id: 11, pId: 1, name: "父节点11 - 折叠"},
+        {id: 111, pId: 11, name: "叶子节点111"},
+        {id: 112, pId: 11, name: "叶子节点112"},
+        {id: 113, pId: 11, name: "叶子节点113"},
+        {id: 114, pId: 11, name: "叶子节点114"},
+        {id: 12, pId: 1, name: "父节点12 - 折叠"},
+        {id: 121, pId: 12, name: "叶子节点121"},
+        {id: 122, pId: 12, name: "叶子节点122"},
+        {id: 123, pId: 12, name: "叶子节点123"},
+        {id: 124, pId: 12, name: "叶子节点124"},
+        {id: 13, pId: 1, name: "父节点13 - 没有子节点", isParent: true},
+        {id: 2, pId: 0, name: "父节点2 - 折叠"},
+        {id: 21, pId: 2, name: "父节点21 - 展开", open: true},
+        {id: 211, pId: 21, name: "叶子节点211"},
+        {id: 212, pId: 21, name: "叶子节点212"},
+        {id: 213, pId: 21, name: "叶子节点213"},
+        {id: 214, pId: 21, name: "叶子节点214"},
+        {id: 22, pId: 2, name: "父节点22 - 折叠"},
+        {id: 221, pId: 22, name: "叶子节点221"},
+        {id: 222, pId: 22, name: "叶子节点222"},
+        {id: 223, pId: 22, name: "叶子节点223"},
+        {id: 224, pId: 22, name: "叶子节点224"},
+        {id: 23, pId: 2, name: "父节点23 - 折叠"},
+        {id: 231, pId: 23, name: "叶子节点231"},
+        {id: 232, pId: 23, name: "叶子节点232"},
+        {id: 233, pId: 23, name: "叶子节点233"},
+        {id: 234, pId: 23, name: "叶子节点234"},
+        {id: 3, pId: 0, name: "父节点3 - 没有子节点", isParent: true}
+    ];
+
+    // 动态 Ajax 数据加载
+    function initTree() {
+        $.ajax({
+           url: 'getDsSection',
+           dataType: 'json',
+           type: 'GET',
+           success: function(data) {
+               var zTreeObject = $.fn.zTree.init($("#ztreedemo"), setting, data);
+           }
+        });
+    }
+
+    $(function() {
+        initTree();
+    });
+</script>
+</html>

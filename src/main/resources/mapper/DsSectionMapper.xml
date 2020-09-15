@@ -7,4 +7,7 @@
     <select id="getParentDsSection" resultType="com.bilibili.datasource.entites.DsSection">
         SELECT section_name FROM `ds_section` WHERE section_pid = 1;
     </select>
+    <select id="getSecondDsSection" parameterType="com.bilibili.datasource.entites.DsSection" resultType="com.bilibili.datasource.entites.DsSection">
+    SELECT section_name FROM ds_section WHERE section_pId= (SELECT section_id FROM ds_section WHERE section_name = #{section_name})
+    </select>
 </mapper>

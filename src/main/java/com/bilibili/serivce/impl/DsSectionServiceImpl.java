@@ -22,4 +22,11 @@ public class DsSectionServiceImpl implements DsSectionService {
     public List<DsSection> getParentDsSection() {
         return dsSectionMapper.getParentDsSection();
     }
+
+    @Override
+    public List<DsSection> getSecondDsSection(String section_name) {
+        return dsSectionMapper.getSecondDsSection(section_name);
+    }
+
+
 }

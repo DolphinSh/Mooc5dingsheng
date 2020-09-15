@@ -23,4 +23,9 @@ public class DsSectionServiceTest {
     public void getParentSectionTest(){
         System.out.println(dsSectionService.getParentDsSection());
     }
+
+    @Test
+    public void getSecondDsSection(){
+        System.out.println(dsSectionService.getSecondDsSection("后勤中心部"));
+    }
 }

@@ -126,16 +126,7 @@
                             /*console.log(chidFrom);*/
                             chidFrom.find("#admin_account").val(data.admin_account);
                             chidFrom.find("#admin_age").val(data.admin_age);
-                            if (data.admin_gender == 1){
-                                console.log("ok")
-                                chidFrom.find("#admin_gender_man").prop("checked",false);
-                                chidFrom.find("#admin_gender_woman").prop("checked",true);
-                            }else {
-                                chidFrom.find("#admin_gender_man").prop("checked",true);
-                                chidFrom.find("#admin_gender_woman").prop("checked",false);
-                            }
-
-
+                            chidFrom.find("#firstDept").val(3);
                         }
                     });
                     /* //同步更新缓存对应的值

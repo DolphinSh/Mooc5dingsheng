@@ -10,6 +10,7 @@ import com.bilibili.serivce.DsAdminService;
 
 import com.bilibili.serivce.DsSectionService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -63,5 +64,10 @@ public class HRMController {
     @ResponseBody
     public String getParentSection(){
         return JSON.toJSONString(dsSectionService.getParentDsSection());
+    }
+    @GetMapping("/page/personmanage/getSecondDeptName")
+    @ResponseBody
+    public String getSecondDsSection(@RequestParam("section_name") String section_name ){
+        return JSON.toJSONString(dsSectionService.getSecondDsSection(section_name));
     }
 }

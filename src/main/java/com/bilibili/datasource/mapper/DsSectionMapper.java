@@ -11,4 +11,5 @@ import java.util.List;
 public interface DsSectionMapper {
     List<DsSection> getDsSection();
     List<DsSection> getParentDsSection();
+    List<DsSection> getSecondDsSection(String section_name);
 }
